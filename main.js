@@ -20,20 +20,39 @@ var ball = {
     dx:3,
     dy:3
 }
-
+wristX ="";
+wristY ="";
+score_wrist="";
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent('canvas');
   video = createCapture(VIDEO);
   video.hide();  
   poseNet=ml5.poseNet(video,modelLoaded);
+  poseNet.on('pose',gotPoses);
 }
 
 function modelLoaded(){
   console.log('Model Loaded!');
 }
 
+function gotPoses(results){
+if(results.length> 0){
+  wristX = results[0].pose.rightWrist.x;
+    wristY = results[0].pose.rightWrist.y;
+    score_wrist=results[0].pose.keypoints[10].score;
+    console.log(score_wrist);
+}
+}
+
 function draw(){
+
+  if(score_wrist> 0.2){
+
+    fill("red");
+      stroke("red");
+circle(wristX,wristY,30);
+}
 
  background(0); 
 image(video,0,0,700,600);
