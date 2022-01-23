@@ -24,7 +24,17 @@ wristX ="";
 wristY ="";
 score_wrist="";
 game_status="";
+function preload(){
+  ball_touch = loadSound("ball_touch_paddel.wav");
+  ball_miss = loadSound("missed.wav");
 
+}
+function restart(){
+  pcscore=0;
+  playerscore=0;
+  loop();
+  
+}
 function startGame(){
   game_status="start";
   document.getElementById("status").innerHTML="Game Is Loaded";
@@ -152,11 +162,13 @@ function move(){
   if (ball.x-2.5*ball.r/2< 0){
   if (ball.y >= paddle1Y&& ball.y <= paddle1Y + paddle1Height) {
     ball.dx = -ball.dx+0.5; 
+    ball_touch.play();
   }
   else{
     pcscore++;
     reset();
     navigator.vibrate(100);
+    ball_miss.play();
   }
 }
 if(pcscore ==4){
@@ -167,7 +179,7 @@ if(pcscore ==4){
     stroke("white");
     textSize(25)
     text("Game Over!☹☹",width/2,height/2);
-    text("Reload The Page!",width/2,height/2+30)
+    text("Press The Restart Button To Play Again",width/2,height/2+30)
     noLoop();
     pcscore = 0;
 }
