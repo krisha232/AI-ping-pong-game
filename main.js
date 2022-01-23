@@ -88,7 +88,7 @@ function draw(){
      fill(250,0,0);
       stroke(0,0,250);
       strokeWeight(0.5);
-     paddle1Y = mouseY; 
+     paddle1Y = wristY; 
      rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
      
      
