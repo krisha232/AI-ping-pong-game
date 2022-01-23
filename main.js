@@ -64,7 +64,7 @@ if(results.length> 0){
 function draw(){
 
   if (game_status=="start"){
-    if(score_wrist> 0.01){
+    if(score_wrist> 0.000001){
 
       fill("red");
         stroke("red");
